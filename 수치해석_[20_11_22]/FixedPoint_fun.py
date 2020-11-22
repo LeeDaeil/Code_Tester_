@@ -2,8 +2,8 @@
 고정점 방법 사용한 근 계산기 (by Daeil Lee)
 
 Ref
-    1. https://stackoverflow.com/questions/14392208/how-to-do-the-bisection-method-in-python
-    2. https://github.com/rursvd/pynumerical2/blob/master/8_2.py
+    1. https://www.codesansar.com/numerical-methods/fixed-point-iteration-python-program-output.htm
+    2. https://github.com/scipy/scipy/blob/v1.5.4/scipy/optimize/minpack.py#L894-L937
 """
 import matplotlib.pylab as plt
 import argparse
