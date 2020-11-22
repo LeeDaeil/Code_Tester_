@@ -10,7 +10,7 @@ import argparse
 from math import *
 
 
-class BisecFun:
+class BisectionFun:
     def __init__(self, fun=object, x_min=float, x_max=float, err=float):
         """
         이분법을 사용한 근 계산기
@@ -86,7 +86,7 @@ class BisecFun:
 
 
 parser = argparse.ArgumentParser(description='이분법 사용한 근 계산기 (by Daeil Lee)')
-parser.add_argument('--fun', type=str, required=True, help="함수식 x 로 표기")
+parser.add_argument('--fun', type=str, required=True, help="함수식 f(x)")
 parser.add_argument('--xmin', type=float, required=True, help="x min")
 parser.add_argument('--xmax', type=float, required=True, help="x max")
 parser.add_argument('--err', type=float, required=True, help="error")
@@ -95,6 +95,6 @@ args = parser.parse_args()
 # 문자열 식을 함수로 변환
 def fun_(eq=str): return lambda x: eval(eq)
 
-bisec = BisecFun(fun=fun_(args.fun), x_min=args.xmin, x_max=args.xmax, err=args.err)
+bisec = BisectionFun(fun=fun_(args.fun), x_min=args.xmin, x_max=args.xmax, err=args.err)
 bisec.get_info()
 bisec.plot()
