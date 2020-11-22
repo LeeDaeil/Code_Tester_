@@ -9,7 +9,6 @@ import matplotlib.pylab as plt
 import argparse
 from random import randint
 from math import *
-import time
 
 
 class FixedPointFun:
@@ -61,8 +60,6 @@ class FixedPointFun:
 
             # 2. err 보다 작으면 종료
             if abs(self._get_fun(get_gx_0) - get_gx_old) < self._get_error: break
-
-            time.sleep(0.1)
         print('Done!')
 
     def get_info(self):
