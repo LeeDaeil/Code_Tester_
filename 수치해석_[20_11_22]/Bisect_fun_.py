@@ -6,6 +6,8 @@ Ref
     2. https://github.com/rursvd/pynumerical2/blob/master/8_2.py
 """
 import matplotlib.pylab as plt
+import argparse
+from math import *
 
 
 class BisecFun:
@@ -35,7 +37,8 @@ class BisecFun:
         self._info = {'x_start_min': self._get_x_min,       'x_min_list': [],
                       'x_start_max': self._get_x_max,       'x_max_list': [],
                       'x_start_mid': self._x_mid,           'x_mid_list': [],
-                      'iter': 0,                            'iter_list': [],}
+                      'iter': 0,                            'iter_list': [],
+                      'root': 0,}
 
         # assert part
         assert not x_min >= x_max, 'x_min 값은 x_max 보다 커야합니다.'
@@ -48,6 +51,7 @@ class BisecFun:
         self._info['x_max_list'].append(self._x_max)
         self._info['x_mid_list'].append(self._x_mid)
         self._info['iter_list'].append(self._info['iter'])
+        self._info['root'] = self._x_mid
         self._info['iter'] += 1
 
     def _run(self):
@@ -69,7 +73,8 @@ class BisecFun:
         print('Done!')
 
     def get_info(self):
-        return print(self._info)
+        print(f"Root {self._info['root']} | Iter {self._info['iter']} |")
+        return 0
 
     def plot(self):
         plt.plot(self._info['x_min_list'], label='Min')
@@ -80,7 +85,16 @@ class BisecFun:
         plt.show()
 
 
-if __name__ == '__main__':
-    bisec = BisecFun(fun=lambda x: x + 1, x_min=-10, x_max=10, err=0.0001)
-    bisec.get_info()
-    bisec.plot()
+parser = argparse.ArgumentParser(description='이분법 사용한 근 계산기 (by Daeil Lee)')
+parser.add_argument('--fun', type=str, required=True, help="함수식 x 로 표기")
+parser.add_argument('--xmin', type=float, required=True, help="x min")
+parser.add_argument('--xmax', type=float, required=True, help="x max")
+parser.add_argument('--err', type=float, required=True, help="error")
+args = parser.parse_args()
+
+# 문자열 식을 함수로 변환
+def fun_(eq=str): return lambda x: eval(eq)
+
+bisec = BisecFun(fun=fun_(args.fun), x_min=args.xmin, x_max=args.xmax, err=args.err)
+bisec.get_info()
+bisec.plot()
