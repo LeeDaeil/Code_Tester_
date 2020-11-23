@@ -96,8 +96,8 @@ class NonLinearNewtonFun:
         fun_list_ = {f'{f.split(":")[0]}': f.split(":")[1] for f in fun_list_}
         # 2. warp
         for key in fun_list_.keys():
-            fun_list_[key] = {'Eq': fun_list_[key], 'F': sympify(fun_list_[key]) }
-        print(fun_list_)
+            fun_list_[key] = {'Eq': fun_list_[key], 'F': sympify(fun_list_[key])}
+        # print(fun_list_)
         return fun_list_
 
     def _find_jacobian(self) -> list:
@@ -128,7 +128,7 @@ class NonLinearNewtonFun:
             for x_ in range(self._check_x_nub):  # 인자의 수
                 J_cal_table_row.append(float(self._jacobian_info[j][x_].subs(get_x_val)))
             J_cal_table.append(J_cal_table_row)
-        print(np.array(J_cal_table))
+        # print(np.array(J_cal_table))
         return np.array(J_cal_table)
 
     def _cal_fun_table(self) -> np.array:
@@ -142,7 +142,11 @@ class NonLinearNewtonFun:
         return np.array(get_y)
 
     def _run(self):
+        iter_ = 0
         while True:
+            iter_ += 1
+            print(f"Iter: {iter_}|"
+                  f"X_: {[self._x_range_info[f'x_{i + 1}']['FinVal'] for i in range(self._check_x_nub)]}")
             # 1. 초기 값에 계산
             f = self._cal_fun_table()       # [12 9 ...]
             out_ = - self._omega * np.dot(np.linalg.inv(self._cal_jacobinan_table()), f)
@@ -150,7 +154,6 @@ class NonLinearNewtonFun:
             for i in range(len(out_)):
                 self._x_range_info[f'x_{i + 1}']['FinVal'] += out_[i]
                 self._x_range_info[f'x_{i + 1}']['FinVal_list'].append(self._x_range_info[f'x_{i + 1}']['FinVal'])
-            print([self._x_range_info[f'x_{i + 1}']['FinVal'] for i in range(len(out_))])
 
             # 3. 종료
             if len(self._x_range_info[f'x_1']['FinVal_list']) > 2:
@@ -165,7 +168,6 @@ class NonLinearNewtonFun:
                 # Max iter 선택시
                 if self._max_iter != 0 and len(self._x_range_info[f'x_1']['FinVal_list']) > self._max_iter:
                     Trig = True
-
                 if Trig:
                     break
         print('Done!')
@@ -173,9 +175,12 @@ class NonLinearNewtonFun:
     def plot(self):
         for i in range(self._check_x_nub):
             plt.plot(self._x_range_info[f'x_{i + 1}']['FinVal_list'], label=f'x_{i + 1}')
+        plt.xlabel('Iter')
+        plt.ylabel('X value')
         plt.legend()
         plt.grid()
         plt.show()
+
 
 
 parser = argparse.ArgumentParser(description='Newton Raphson법 사용한 근 계산기 (by Daeil Lee)')

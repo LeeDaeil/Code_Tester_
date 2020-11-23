@@ -57,6 +57,9 @@ class BisectionFun:
 
     def _run(self):
         while True:
+            # -. logger
+            self._log()
+
             # 1. 중간 값 도출
             self._x_mid = (self._x_min + self._x_max) / 2
             # 2. Search 시작
@@ -64,23 +67,24 @@ class BisectionFun:
                 self._x_max = self._x_mid
             else:
                 self._x_min = self._x_mid
-
-            # -. logger
-            self._log()
-
+            print(f"Iter: {self._info['iter']}|"
+                  f"Root: {self._x_mid}|")
             # 3. err 보다 작으면 종료
             if abs(self._get_fun(self._x_mid)) < self._get_error: break
 
         print('Done!')
 
     def get_info(self):
-        print(f"Root {self._info['root']} | Iter {self._info['iter']} |")
+        print(f"Iter: {self._info['iter']}|"
+              f"Root: {self._info['root']}|")
         return 0
 
     def plot(self):
         plt.plot(self._info['x_min_list'], label='Min')
         plt.plot(self._info['x_mid_list'], label='Mid')
         plt.plot(self._info['x_max_list'], label='Max')
+        plt.xlabel('Iter')
+        plt.ylabel('X value')
         plt.legend()
         plt.grid()
         plt.show()

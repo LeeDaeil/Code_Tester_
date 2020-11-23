@@ -49,7 +49,11 @@ class FixedPointFun:
         self._info['iter'] += 1
 
     def _run(self):
+        print(f"Start {self._info['x_start_ran_x0']} ====== ")
+
         while True:
+            print(f"Iter: {self._info['iter']}|"
+                  f"Root: {self._x_0}|")
             # 1. 초기 값에 대한 g(x) 계산 후 x_0 값 업데이트
             new_x_0 = self._get_fun(self._x_0)
             old_x_0 = self._x_0
@@ -57,17 +61,20 @@ class FixedPointFun:
             # -. logger
             self._log()
             self._x_0 = new_x_0
-            print(self._x_0, self._get_fun(new_x_0))
+            # print(self._x_0, self._get_fun(new_x_0))
             # 2. err 보다 작으면 종료
             if abs(self._get_fun(new_x_0) - old_x_0) < self._get_error: break
         print('Done!')
 
     def get_info(self):
-        print(f"Root {self._info['root']} | Iter {self._info['iter']} | Start {self._info['x_start_ran_x0']}")
+        print(f"Iter: {self._info['iter']}|"
+              f"Root: {self._info['root']}|")
         return 0
 
     def plot(self):
         plt.plot(self._info['x_ran_x0_list'], label='x_0')
+        plt.xlabel('Iter')
+        plt.ylabel('X value')
         plt.legend()
         plt.grid()
         plt.show()
