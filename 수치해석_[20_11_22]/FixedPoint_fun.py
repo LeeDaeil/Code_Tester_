@@ -57,7 +57,7 @@ class FixedPointFun:
             # -. logger
             self._log()
             self._x_0 = new_x_0
-
+            print(self._x_0, self._get_fun(new_x_0))
             # 2. err 보다 작으면 종료
             if abs(self._get_fun(new_x_0) - old_x_0) < self._get_error: break
         print('Done!')

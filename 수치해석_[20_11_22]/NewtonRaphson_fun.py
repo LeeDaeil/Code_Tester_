@@ -64,7 +64,6 @@ class NewtonRaphsonFun:
             # -. logger
             self._log()
             self._x_0 = new_x_0
-            time.sleep(0.1)
             print(self._x_0, self._get_fun(new_x_0))
             # 3. err 보다 작으면 종료
             if abs(self._get_fun(new_x_0)) < self._get_error: break
@@ -85,8 +84,8 @@ class NewtonRaphsonFun:
 parser = argparse.ArgumentParser(description='Newton Raphson법 사용한 근 계산기 (by Daeil Lee)')
 parser.add_argument('--fun', type=str, required=True, help="함수식 f(x)")
 parser.add_argument('--derfun', type=str, required=True, help="미분 함수식 f(x)'")
-parser.add_argument('--xmin', type=float, required=True, help="x min")
-parser.add_argument('--xmax', type=float, required=True, help="x max")
+parser.add_argument('--xmin', type=float, required=False, help="x min")
+parser.add_argument('--xmax', type=float, required=False, help="x max")
 parser.add_argument('--err', type=float, required=True, help="error")
 args = parser.parse_args()
 
