@@ -4,6 +4,7 @@
 Ref
     1. https://stackoverflow.com/questions/14392208/how-to-do-the-bisection-method-in-python
     2. https://github.com/rursvd/pynumerical2/blob/master/8_2.py
+    3. https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.bisect.html#scipy.optimize.bisect
 """
 import matplotlib.pylab as plt
 import argparse
@@ -28,7 +29,7 @@ class BisectionFun:
         self._get_fun = fun
         self._get_x_min = x_min
         self._get_x_max = x_max
-        self._get_error = err
+        self._get_error = abs(err)
 
         self._x_min = float(x_min)             # _step 진행 시 업데이트
         self._x_max = float(x_max)             # _step 진행 시 업데이트
