@@ -92,6 +92,6 @@ args = parser.parse_args()
 # 문자열 식을 함수로 변환
 def fun_(eq=str): return lambda x: eval(eq)
 
-bisec = NewtonRaphsonFun(fun=fun_(args.fun), der_fun=fun_(args.derfun), x_min=args.xmin, x_max=args.xmax, err=args.err)
-bisec.get_info()
-bisec.plot()
+out = NewtonRaphsonFun(fun=fun_(args.fun), der_fun=fun_(args.derfun), x_min=args.xmin, x_max=args.xmax, err=args.err)
+out.get_info()
+out.plot()

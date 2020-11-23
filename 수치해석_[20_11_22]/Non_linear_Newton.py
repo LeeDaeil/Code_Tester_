@@ -168,10 +168,6 @@ class NonLinearNewtonFun:
                 if Trig:
                     break
 
-    # def get_info(self):
-    #     print(f"Root {self._info['root']} | Iter {self._info['iter']} | Start {self._info['x_start_ran_x0']}")
-    #     return 0
-    #
     def plot(self):
         for i in range(self._check_x_nub):
             plt.plot(self._x_range_info[f'x_{i + 1}']['FinVal_list'], label=f'x_{i + 1}')
@@ -190,7 +186,6 @@ parser.add_argument('-e', '--e', type=float, required=True, help="error")
 parser.add_argument('-maxiter', '--maxiter', type=int, default=0, required=False, help="maxiter")
 args = parser.parse_args()
 
-bisec = NonLinearNewtonFun(fun_list=args.f, x_r=args.xr, omega=args.o, err=args.e, max_iter=args.maxiter)
-# bisec.get_info()
-bisec.plot()
+out = NonLinearNewtonFun(fun_list=args.f, x_r=args.xr, omega=args.o, err=args.e, max_iter=args.maxiter)
+out.plot()
 

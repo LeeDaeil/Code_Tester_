@@ -75,6 +75,9 @@ class FixedPointFun:
 
 parser = argparse.ArgumentParser(description='고정점 방법 사용한 근 계산기 (by Daeil Lee)')
 parser.add_argument('--fun', type=str, required=True, help="함수식 g(x)")
+"""
+f(x) = x ** 2 + x * 2 ->>  x = (x**2)/2 = g(x) 
+"""
 parser.add_argument('--xmin', type=float, required=True, help="x min")
 parser.add_argument('--xmax', type=float, required=True, help="x max")
 parser.add_argument('--err', type=float, required=True, help="error")
@@ -83,6 +86,6 @@ args = parser.parse_args()
 # 문자열 식을 함수로 변환
 def fun_(eq=str): return lambda x: eval(eq)
 
-bisec = FixedPointFun(fun=fun_(args.fun), x_min=args.xmin, x_max=args.xmax, err=args.err)
-bisec.get_info()
-bisec.plot()
+out = FixedPointFun(fun=fun_(args.fun), x_min=args.xmin, x_max=args.xmax, err=args.err)
+out.get_info()
+out.plot()
