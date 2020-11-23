@@ -24,6 +24,7 @@ class NonLinearNewtonFun:
         :param x_r: 'x_1:1:1, x_2:3'
         :param omega:
         :param err:
+        :param max_iter:
         """
         # init part
         self._check_x_nub = self._find_x_nub(fun_list)
@@ -167,6 +168,7 @@ class NonLinearNewtonFun:
 
                 if Trig:
                     break
+        print('Done!')
 
     def plot(self):
         for i in range(self._check_x_nub):
